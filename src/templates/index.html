@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ title }}</title>
 </head>
 <body>
-templates is working
+<h1>{{ title }} is working!</h1>
+
+{{ object_list }}<br><br>
+
+{% for obj in object_list %}
+
+{{ obj.title }}<br>
+{{ obj.content }}<br>
+{{ obj.timestamp }}<br>
+{{ obj.id }}<br>
+{{ obj.pk }}<br>
+
+{% endfor %}
 </body>
 </html>
