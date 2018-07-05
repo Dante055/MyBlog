@@ -12,7 +12,7 @@ def post_list(request):
         'object_list': queryset,
         'title': "List"
     }
-    return render(request, "index.html", context)
+    return render(request, "post_list.html", context)
     # return HttpResponse("<h1>List</h1>")
 
 
@@ -24,8 +24,7 @@ def post_create(request):
         # message success
         messages.success(request, "Successfully Created")
         return HttpResponseRedirect(instance.get_absolute_url())
-    else:
-        messages.error(request, "Not Successfully Created")
+
     context = {
         'form': form,
         'title': 'Form'
@@ -38,9 +37,9 @@ def post_detail(request, id=None):
     # instance = Post.objects.get(id=4)
     instance = get_object_or_404(Post, id=id)
     context = {
-        'title': 'Detail',
         'post_title': instance.title,
-        'instance': instance
+        'instance': instance,
+        'title': 'Detail'
     }
     return render(request, "post_detail.html", context)
     # return HttpResponse("<h1>Detail</h1>")
@@ -52,14 +51,14 @@ def post_update(request, id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, "Successfully Saved")
+        messages.success(request, "Successfully Edited  ")
         return HttpResponseRedirect(instance.get_absolute_url())
 
     context = {
-        'title': 'Edit',
         'post_title': instance.title,
         'instance': instance,
-        'form':form
+        'form':form,
+        'title':'Edit'
     }
     return render(request, 'post_form.html', context)
 
