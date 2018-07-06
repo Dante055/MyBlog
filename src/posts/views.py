@@ -1,10 +1,12 @@
+from urllib import quote_plus
+
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import Post
 from .forms import PostForm
+from .models import Post
 
 
 def post_list(request):
@@ -48,20 +50,22 @@ def post_create(request):
     # return HttpResponse("<h1>Create</h1>")
 
 
-def post_detail(request, id=None):
+def post_detail(request, slug=None):
     # instance = Post.objects.get(id=4)
-    instance = get_object_or_404(Post, id=id)
+    instance = get_object_or_404(Post, slug=slug)
+    share_string = quote_plus(instance.content)
     context = {
-        'post_title': instance.title,
-        'instance': instance,
+        "title": instance.title,
+        "instance": instance,
+        "share_string": share_string,
         'title': 'Detail'
     }
     return render(request, "post_detail.html", context)
     # return HttpResponse("<h1>Detail</h1>")
 
 
-def post_update(request, id=None):
-    instance = get_object_or_404(Post, id=id)
+def post_update(request, slug=None):
+    instance = get_object_or_404(Post, slug=slug)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
@@ -80,8 +84,8 @@ def post_update(request, id=None):
     # return HttpResponse("<h1>Update</h1>")
 
 
-def post_delete(request, id=None):
-    instance = get_object_or_404(Post, id=id)
+def post_delete(request, slug=None):
+    instance = get_object_or_404(Post, slug=slug)
     instance.delete()
     messages.success(request, "Successfully deleted")
     return redirect("posts:list")
