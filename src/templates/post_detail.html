@@ -35,9 +35,14 @@ Linkedin
 
 <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
 
-<hr>
-{{ instance.content|linebreaks }}<br/>
+<div class='row'>
+<div class='col-sm-12 '>
 
+<div class='content-markdown'>{{ instance.content }}</div> # nextline = space+space+enter
+
+
+<hr/>
+<br/>
 <div id="disqus_thread"></div>
 <script>
 
@@ -59,8 +64,8 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
-
-
+</div>
+</div>
 </div>
 
 {% endblock content %}
