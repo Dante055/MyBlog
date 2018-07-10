@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load urlify %}
+<!--{% load markdown_deux_tags %}-->
 
 {% block head_title %}
 {{ title }} | {{ block.super }}
@@ -38,8 +39,10 @@ Linkedin
 <div class='row'>
 <div class='col-sm-12 '>
 
-<div class='content-markdown'>{{ instance.content }}</div> # nextline = space+space+enter
-
+<div class='content-markdown post-detail-item'>{{ instance.content }}</div>
+    <!--nextline = space+space+enter-->
+<!--<div class='post-detail-item'>{{ instance.get_markdown|linebreaks }}</div>-->
+<!--<div class='post-detail-item'>{{ instance.content|markdown|linebreaks }}</div>-->
 
 <hr/>
 <br/>
