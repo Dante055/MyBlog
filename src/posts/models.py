@@ -55,6 +55,7 @@ class Post(models.Model):
     def get_absolute_url_2(self):
         return reverse('posts:update', kwargs={'slug': self.slug})
 
+
     class Meta:
         ordering = ['-timestamp', '-updated']
 

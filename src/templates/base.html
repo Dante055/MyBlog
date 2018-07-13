@@ -25,15 +25,20 @@
 {% include "messages_display.html" %}
 <div class='container'>
     <ol class='breadcrumb'>
-        <li><a href="">Home</a> </li>
-        <li><a href="">Post</a> </li>
-        <li><a href="">Create</a> </li>
+        <li><a href="{% url "posts:list" %}">Home</a> </li>
+        {% block post_detail_link %}
+        {% endblock %}
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url "posts:create" %}">Create</a> </li>
+        {% else %}
+        <li><a href="{% url "accounts:login" %}">Create</a> </li>
+        {% endif %}
 
         {% if not request.user.is_authenticated %}
-        <li class="pull-right"><a href=" ">Register</a> </li>
-        <li class="pull-right"><a href="">Login</a> </li>
+        <li class="pull-right"><a href="{% url "accounts:register" %}">Register</a> </li>
+        <li class="pull-right"><a href="{% url "accounts:login" %}">Login</a> </li>
         {% else %}
-        <li class="pull-right"><a href="">Logout</a> </li>
+        <li class="pull-right"><a href="{% url "accounts:logout" %}">Logout</a> </li>
         {% endif %}
     </ol>
 {% block content %}{% endblock content %}

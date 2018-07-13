@@ -20,7 +20,7 @@ def login_view(request):
         login(request, user)
         print(request.user.is_authenticated())
         # redirect
-        return redirect("/posts")
+        return redirect("/")
     return render(request, "form.html", {"form": form, "title": title})
 
 
@@ -35,7 +35,7 @@ def register_view(request):
         user.save()
         new_user = authenticate(username=user.username, password=password)
         login(request, new_user)
-        return redirect("/posts")
+        return redirect("/")
 
     context = {
         "form": form,
@@ -46,4 +46,4 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("/posts")
+    return redirect("/")
