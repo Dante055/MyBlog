@@ -24,6 +24,18 @@
 <body>
 {% include "messages_display.html" %}
 <div class='container'>
+    <ol class='breadcrumb'>
+        <li><a href="">Home</a> </li>
+        <li><a href="">Post</a> </li>
+        <li><a href="">Create</a> </li>
+
+        {% if not request.user.is_authenticated %}
+        <li class="pull-right"><a href=" ">Register</a> </li>
+        <li class="pull-right"><a href="">Login</a> </li>
+        {% else %}
+        <li class="pull-right"><a href="">Logout</a> </li>
+        {% endif %}
+    </ol>
 {% block content %}{% endblock content %}
 </div>
 
