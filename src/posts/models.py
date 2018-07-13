@@ -49,6 +49,12 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('posts:detail', kwargs={'slug': self.slug})
 
+    def get_absolute_url_1(self):
+        return reverse('posts:delete', kwargs={'slug': self.slug})
+
+    def get_absolute_url_2(self):
+        return reverse('posts:update', kwargs={'slug': self.slug})
+
     class Meta:
         ordering = ['-timestamp', '-updated']
 
@@ -56,7 +62,6 @@ class Post(models.Model):
         content = self.content
         markdown_text = markdown(content)
         return mark_safe(markdown_text)
-
 
 
 def create_slug(instance, new_slug=None):

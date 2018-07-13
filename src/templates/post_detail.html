@@ -44,6 +44,12 @@ Linkedin
 <!--<div class='post-detail-item'>{{ instance.get_markdown|linebreaks }}</div>-->
 <!--<div class='post-detail-item'>{{ instance.content|markdown|linebreaks }}</div>-->
 
+{% if delete %}
+    <!--<input type='submit' value='Delete Post' class='btn btn-warning'>-->
+    <a href="{{ instance.get_absolute_url_2 }}" class="btn btn-success" role="button">Update</a>
+    <a href="{{ instance.get_absolute_url_1 }}" class="btn btn-danger" role="button">Delete Post</a>
+{% endif %}
+
 <hr/>
 <br/>
 <div id="disqus_thread"></div>

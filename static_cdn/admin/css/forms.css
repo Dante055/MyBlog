@@ -497,3 +497,8 @@ form .related-widget-wrapper ul {
 .clearable-file-input input {
     margin-top: 0;
 }
+
+.wmd-panel{
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}

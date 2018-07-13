@@ -6,11 +6,10 @@ from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 from .forms import PostForm
 from .models import Post
-
-
 
 
 def post_list(request):
@@ -74,6 +73,10 @@ def post_create(request):
 def post_detail(request, slug=None):
     # instance = Post.objects.get(id=4)
     instance = get_object_or_404(Post, slug=slug)
+    if instance.user == request.user:
+        delete = True
+    else:
+        delete = False
     if instance.draft or instance.publish > timezone.now().date():
         if not request.user.is_staff or not request.user.is_superuser:
             raise Http404
@@ -82,7 +85,8 @@ def post_detail(request, slug=None):
         "title": instance.title,
         "instance": instance,
         "share_string": share_string,
-        'title': 'Detail'
+        'title': 'Detail',
+        'delete': delete
     }
     return render(request, "post_detail.html", context)
     # return HttpResponse("<h1>Detail</h1>")
@@ -111,8 +115,32 @@ def post_update(request, slug=None):
 
 
 def post_delete(request, slug=None):
-    instance = get_object_or_404(Post, slug=slug)
-    instance.delete()
-    messages.success(request, "Successfully deleted")
-    return redirect("posts:list")
-    # return HttpResponse("<h1>Delete</h1>")
+    # instance = get_object_or_404(Post, slug=slug)
+    # instance.delete()
+    # messages.success(request, "Successfully deleted")
+    # return redirect("posts:list")
+    # # return HttpResponse("<h1>Delete</h1>")
+
+    try:
+        # obj = Post.objects.get(slug=slug)
+        obj = get_object_or_404(Post, slug=slug)
+    except:
+        raise Http404
+    # instance = get_object_or_404(Post, slug=slug)
+    if obj.user != request.user:
+        # messages.success(request, "You do not have permission to view this.")
+        # raise Http404
+        reponse = HttpResponse("You do not have permission to do this.")
+        reponse.status_code = 403
+        return reponse
+    # return render(request, "confirm_delete.html", context, status_code=403)
+
+    if request.method == "POST":
+        # parent_obj_url = obj.get_absolute_url()
+        obj.delete()
+        messages.success(request, "Successfully deleted")
+        return HttpResponseRedirect(reverse('posts:list'))
+    context = {
+        "object": obj
+    }
+    return render(request, "confirm_delete.html", context)
