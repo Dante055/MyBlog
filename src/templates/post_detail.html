@@ -22,22 +22,50 @@
 {% endif %}
 
 
+
+<div class='' style="display: inline-block;">
 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
-Facebook
+    <span class='input-group-btn'>
+        <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+        <button class='btn btn-default' type='submit'><i class="fa fa-facebook"></i></button>
+    </span>
 </a>
-
+</div>
+<div class='' style="display: inline-block;">
 <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
-Twitter
+    <span class='input-group-btn'>
+        <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+        <button class='btn btn-default' type='submit'><i class="fa fa-twitter"></i></button>
+    </span>
 </a>
-
-    <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>Google Plus</a>
-
-
+</div>
+<div class='' style="display: inline-block;">
+<a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
+    <span class='input-group-btn'>
+        <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+        <button class='btn btn-default' type='submit'><i class="fa fa-google-plus"></i></button>
+    </span>
+</a>
+</div>
+<div class='' style="display: inline-block;">
 <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
-Linkedin
+    <span class='input-group-btn'>
+        <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+        <button class='btn btn-default' type='submit'><i class="fa fa-linkedin"></i></button>
+    </span>
 </a>
+</div>
+<div class='' style="display: inline-block;">
+<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">
+    <span class='input-group-btn'>
+        <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
+        <button class='btn btn-default' type='submit'><i class="fa fa-reddit"></i></button>
+    </span>
+</a>
+</div>
 
-<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
+<hr/>
+<br/>
 
 <div class='row'>
 <div class='col-sm-12 '>
@@ -53,9 +81,12 @@ Linkedin
     <a href="{{ instance.get_absolute_url_1 }}" class="btn btn-danger" role="button">Delete Post</a>
 {% endif %}
 
+
 <hr/>
 <br/>
+
 <div id="disqus_thread"></div>
+
 <script>
 
 /**
