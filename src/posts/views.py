@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.urlresolvers import reverse
+from django.views.generic import RedirectView
 
 from .forms import PostForm
 from .models import Post
@@ -144,3 +145,17 @@ def post_delete(request, slug=None):
         "object": obj
     }
     return render(request, "confirm_delete.html", context)
+
+
+class PostLikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        obj = get_object_or_404(Post, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.likes.all():
+                obj.likes.remove(user)
+            else:
+                obj.likes.add(user)
+        return url_

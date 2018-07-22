@@ -40,7 +40,7 @@ class Post(models.Model):
     publish = models.DateField(auto_now=False, auto_now_add=False)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
-
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', blank=True )
     objects = PostManager()
 
     def __unicode__(self):
@@ -55,6 +55,8 @@ class Post(models.Model):
     def get_absolute_url_2(self):
         return reverse('posts:update', kwargs={'slug': self.slug})
 
+    def get_like_url(self):
+        return reverse('posts:like-toggle', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ['-timestamp', '-updated']

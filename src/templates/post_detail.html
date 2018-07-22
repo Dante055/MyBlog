@@ -22,12 +22,19 @@
 {% endif %}
 
 
+    <p>
+    <a href="{{ instance.get_like_url }}"><button class='btn btn-default' title="Like this post" data-toggle="tooltip" type='submit'><i class="fa fa-thumbs-up" ></i></button></a>  {% if instance.likes.count > 0 %}{{ instance.likes.count }}{% endif %}
+    </p>
+<!--{% if instance.likes.count > 0 %}-->
+<!--<p>{{ instance.likes.count }} people like this post</p>-->
+<!--{% endif %}-->
+
 
 <div class='' style="display: inline-block;">
 <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}">
     <span class='input-group-btn'>
         <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-        <button class='btn btn-default' type='submit'><i class="fa fa-facebook"></i></button>
+        <button class='btn btn-default' title="Share this post on Facebook" data-toggle="tooltip" type='submit'><i class="fa fa-facebook"></i></button>
     </span>
 </a>
 </div>
@@ -35,7 +42,7 @@
 <a href="https://twitter.com/home?status={{ share_string }}%20{{ request.build_absolute_uri }}">
     <span class='input-group-btn'>
         <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-        <button class='btn btn-default' type='submit'><i class="fa fa-twitter"></i></button>
+        <button class='btn btn-default' title="Share this post Twitter" data-toggle="tooltip" type='submit'><i class="fa fa-twitter"></i></button>
     </span>
 </a>
 </div>
@@ -43,7 +50,7 @@
 <a href='https://plus.google.com/share?url={{ request.build_absolute_uri }}'>
     <span class='input-group-btn'>
         <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-        <button class='btn btn-default' type='submit'><i class="fa fa-google-plus"></i></button>
+        <button class='btn btn-default' title="Share this post on Google Plus" data-toggle="tooltip" type='submit'><i class="fa fa-google-plus"></i></button>
     </span>
 </a>
 </div>
@@ -51,7 +58,7 @@
 <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ instance.title }}&summary={{ share_string }}&source={{ request.build_absolute_uri }}">
     <span class='input-group-btn'>
         <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-        <button class='btn btn-default' type='submit'><i class="fa fa-linkedin"></i></button>
+        <button class='btn btn-default' title="Share this post on Linkedin" data-toggle="tooltip" type='submit'><i class="fa fa-linkedin"></i></button>
     </span>
 </a>
 </div>
@@ -59,13 +66,12 @@
 <a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">
     <span class='input-group-btn'>
         <!-- <input class='btn btn-default' type='submit' value='Search' /> -->
-        <button class='btn btn-default' type='submit'><i class="fa fa-reddit"></i></button>
+        <button class='btn btn-default' title="Share this post on Reddit" data-toggle="tooltip" type='submit'><i class="fa fa-reddit"></i></button>
     </span>
 </a>
 </div>
 
 <hr/>
-<br/>
 
 <div class='row'>
 <div class='col-sm-12 '>
@@ -83,7 +89,6 @@
 
 
 <hr/>
-<br/>
 
 <div id="disqus_thread"></div>
 
@@ -110,5 +115,6 @@ s.setAttribute('data-timestamp', +new Date());
 </div>
 </div>
 </div>
+
 
 {% endblock content %}

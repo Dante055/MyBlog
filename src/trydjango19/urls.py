@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^', include("posts.urls", namespace='posts')),
     # url(r'^login/', login_view, name='login'),
     # url(r'^posts/$', "<appname>.views.<function_name>"),
+
 ]
 
 
