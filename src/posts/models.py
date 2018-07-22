@@ -41,6 +41,7 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', blank=True )
+    dislikes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='dislikes', blank=True )
     objects = PostManager()
 
     def __unicode__(self):
@@ -57,6 +58,9 @@ class Post(models.Model):
 
     def get_like_url(self):
         return reverse('posts:like-toggle', kwargs={'slug': self.slug})
+
+    def get_dislike_url(self):
+        return reverse('posts:dislike-toggle', kwargs={'slug': self.slug})
 
     class Meta:
         ordering = ['-timestamp', '-updated']

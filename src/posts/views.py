@@ -154,8 +154,24 @@ class PostLikeToggle(RedirectView):
         url_ = obj.get_absolute_url()
         user = self.request.user
         if user.is_authenticated():
-            if user in obj.likes.all():
+            if user in obj.likes.all() or obj.dislikes.all():
                 obj.likes.remove(user)
+                obj.dislikes.remove(user)
             else:
                 obj.likes.add(user)
+        return url_
+
+
+class PostDislikeToggle(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        obj = get_object_or_404(Post, slug=slug)
+        url_ = obj.get_absolute_url()
+        user = self.request.user
+        if user.is_authenticated():
+            if user in obj.dislikes.all() or obj.likes.all() :
+                obj.likes.remove(user)
+                obj.dislikes.remove(user)
+            else:
+                obj.dislikes.add(user)
         return url_
