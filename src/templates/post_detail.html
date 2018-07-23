@@ -23,8 +23,8 @@
 
 
 
-        <a href="{{ instance.get_like_url }}"><button class='btn btn-default' title="Like this post" data-toggle="tooltip" type='submit'><i class="fa fa-thumbs-up" ></i></button></a>  {% if instance.likes.count > 0 %}{{ instance.likes.count }} {% endif %}
-     &nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ instance.get_dislike_url }}"><button class='btn btn-default' title="Disike this post" data-toggle="tooltip" type='submit'><i class="fa fa-thumbs-down" ></i></button></a>  {% if instance.dislikes.count > 0 %}{{ instance.dislikes.count }} {% endif %}
+        <a href="{{ instance.get_like_url }}"><button class='btn btn-default' title="Like this post" data-toggle="tooltip" type='submit'><i class="fa fa-thumbs-up" ></i></button></a> {% if instance.likes.count > 0 %}{{ instance.likes.count }} {% endif %}
+     &nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ instance.get_dislike_url }}"><button class='btn btn-default' title="Disike this post" data-toggle="tooltip" type='submit'><i class="fa fa-thumbs-down" ></i></button></a> {% if instance.dislikes.count > 0 %}{{ instance.dislikes.count }} {% endif %}
     </p>
 <!--{% if instance.likes.count > 0 %}-->
 <!--<p>{{ instance.likes.count }} people like this post</p>-->
@@ -84,8 +84,8 @@
 
 {% if delete %}
     <!--<input type='submit' value='Delete Post' class='btn btn-warning'>-->
-    <a href="{{ instance.get_absolute_url_2 }}" class="btn btn-success" role="button">Update</a>
-    <a href="{{ instance.get_absolute_url_1 }}" class="btn btn-danger" role="button">Delete Post</a>
+    <a href="{{ instance.get_absolute_url_2 }}" class="btn btn-success" title="Update this post" data-toggle="tooltip"  role="button">Update</a>
+    <a href="{{ instance.get_absolute_url_1 }}" class="btn btn-danger" title="Delete this post" data-toggle="tooltip" role="button">Delete </a>
 {% endif %}
 
 

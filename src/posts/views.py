@@ -25,7 +25,8 @@ def post_list(request):
             Q(title__icontains=query) |
             Q(content__icontains=query) |
             Q(user__first_name__icontains=query) |
-            Q(user__last_name__icontains=query)
+            Q(user__last_name__icontains=query) |
+            Q(user__username__icontains=query)
         ).distinct()
 
     paginator = Paginator(queryset_list, 5) # Show 10 contacts per page
@@ -42,7 +43,7 @@ def post_list(request):
 
     context = {
         "object_list": queryset,
-        "title": "Underground",
+        "title": "Underground-blog",
         "page_request_var": page_request_var,
         'today':today
     }
@@ -52,7 +53,9 @@ def post_list(request):
 
 
 def post_create(request):
-    if not request.user.is_staff or not request.user.is_superuser:
+    # if not request.user.is_active or not request.user.is_superuser or not request.user.is_staff:
+    #     raise Http404
+    if not request.user.is_authenticated():
         raise Http404
     form = PostForm(request.POST or None, request.FILES or None)
     if form.is_valid():
